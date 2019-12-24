@@ -55,6 +55,36 @@ func (a *Client) SaveOrUpdateIcecream(params *SaveOrUpdateIcecreamParams) (*Save
 }
 
 /*
+DeleteIcecream deletes icecream
+
+Delete Icecream
+*/
+func (a *Client) DeleteIcecream(params *DeleteIcecreamParams) (*DeleteIcecreamOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteIcecreamParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteIcecream",
+		Method:             "DELETE",
+		PathPattern:        "/icecream",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http"},
+		Params:             params,
+		Reader:             &DeleteIcecreamReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteIcecreamOK), nil
+
+}
+
+/*
 GetIcecream gets icecream
 
 Get Icecream

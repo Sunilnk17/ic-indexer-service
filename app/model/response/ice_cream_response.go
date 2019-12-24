@@ -15,7 +15,7 @@ type IcecreamIndexResponse struct {
 	LastUpdatedAt         *time.Time `json:"last_updated_at,omitempty"`
 	ImageOpen             *string    `json:"image_open,omitempty"`
 	Description           *string    `json:"description,omitempty"`
-	Story                 *time.Time `json:"story,omitempty"`
+	Story                 *string    `json:"story,omitempty"`
 	AllergyInfo           *string    `json:"allergy_info,omitempty"`
 	SourcingValues        *[]string  `json:"sourcing_values,omitempty"`
 	Ingredients           *[]string  `json:"ingredients,omitempty"`

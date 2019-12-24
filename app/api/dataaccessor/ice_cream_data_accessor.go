@@ -11,10 +11,12 @@ import (
 	"ic-indexer-service/app/model/request"
 	"ic-indexer-service/app/model/response"
 	"log"
+	"net/http"
 )
 
 type IceCreamDataAccessor interface {
 	CreateOrReplaceIcecream(context.Context, bo.ESIcecream) error
+	DeleteIcecream(context.Context, request.IcecreamDelete) error
 	GetIcecreams(context.Context, request.IcecreamFilter) (response.BulkIcecreamIndexResponse, error)
 	GetIcecreamByKey(context.Context, request.IcecreamIndexRequest) (bo.ESIcecream, error)
 }
@@ -141,5 +143,19 @@ func (icdas icecreamDataAccessorService) CreateOrReplaceIcecream(ctx context.Con
 		Do(ctx)
 
 	log.Print(ctx, "Updated IcecreamIndex. err :", err)
+	return err
+}
+
+func (icdas icecreamDataAccessorService) DeleteIcecream(ctx context.Context, icecream request.IcecreamDelete) error {
+	log.Print(ctx, "Deleting IcecreamIndex")
+
+	res, err := config.GetESConnection().Delete().Index(config.GetConfig().ElasticSearch.Indices.IcecreamIndex.IndexName).
+		Type("icecream").Id(icecream.ProductId).Do(ctx)
+	if res != nil && err != nil {
+		if esErr, ok := err.(*elastic.Error); ok && esErr.Status == http.StatusNotFound {
+			log.Print(ctx, "Data was already deleted")
+			return nil
+		}
+	}
 	return err
 }

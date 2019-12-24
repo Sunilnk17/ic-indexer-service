@@ -1,6 +1,9 @@
 package request
 
-import "time"
+import (
+	"ic-indexer-service/app/utils"
+	"time"
+)
 
 // Get icecream Request
 // swagger:model icecreamRequest
@@ -10,6 +13,14 @@ type IcecreamFilter struct {
 	Id        int64  `schema:"id" url:"id,omitempty"`
 	Name      string `schema:"name"  url:"name,omitempty"`
 	ProductId string `schema:"product_id"  url:"product_id,omitempty"`
+}
+
+// Delete icecream Request
+// swagger:model icecreamDeleteRequest
+type IcecreamDelete struct {
+	// a icecream delete request
+	// in: body
+	ProductId string `schema:"product_id" validate:"required" url:"product_id,omitempty"`
 }
 
 type IcecreamIndexRequest struct {
@@ -48,26 +59,6 @@ type IcecreamClientRequest struct {
 	ProductId             string    `json:"product_id,omitempty"`
 }
 
-type CusTime struct {
-	Value *time.Time
-	Set   bool
-}
-
-type CusArrayString struct {
-	Value *[]string
-	Set   bool
-}
-
-type CusInt64 struct {
-	Value *int64
-	Set   bool
-}
-
-type CusString struct {
-	Value *string
-	Set   bool
-}
-
 // Icecream Generic Response
 //swagger:response genericResponse
 type IcecreamGenericResponse struct {
@@ -91,4 +82,39 @@ type GenericError struct {
 	Code      int    `json:"code"`
 	RequestId string `json:"request_id"`
 	Error     string `json:"error"`
+}
+
+type CusTime struct {
+	Value *time.Time
+	Set   bool
+}
+
+type CusArrayString struct {
+	Value *[]string
+	Set   bool
+}
+
+type CusInt64 struct {
+	Value *int64
+	Set   bool
+}
+
+type CusString struct {
+	Value *string
+	Set   bool
+}
+
+func (x *CusString) UnmarshalJSON(data []byte) error {
+	return utils.UnmarshalJSON(data, new(string), &x.Value, &x.Set)
+}
+
+func (x *CusInt64) UnmarshalJSON(data []byte) error {
+	return utils.UnmarshalJSON(data, new(int64), &x.Value, &x.Set)
+}
+func (x *CusTime) UnmarshalJSON(data []byte) error {
+	return utils.UnmarshalJSON(data, new(time.Time), &x.Value, &x.Set)
+}
+
+func (x *CusArrayString) UnmarshalJSON(data []byte) error {
+	return utils.UnmarshalJSON(data, new([]string), &x.Value, &x.Set)
 }

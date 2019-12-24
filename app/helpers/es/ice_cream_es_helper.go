@@ -48,7 +48,7 @@ func printQuery(ctx context.Context, query *elastic.BoolQuery) {
 
 func (ie icecreamEsHelper) queryWithId(ctx context.Context, query *elastic.BoolQuery, params request.IcecreamFilter) {
 	if params.Id != 0 {
-		query.Must(elastic.NewTermQuery("_id", strconv.FormatInt(params.Id, 10)))
+		query.Must(elastic.NewTermQuery("id", strconv.FormatInt(params.Id, 10)))
 	}
 }
 

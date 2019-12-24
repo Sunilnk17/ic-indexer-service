@@ -17,9 +17,9 @@ func IcecreamIndexResponseBuilder(icecream bo.ESIcecream) response.IcecreamIndex
 	icecreamResponse.ImageClosed = icecream.ImageClosed
 	icecreamResponse.ImageOpen = icecream.ImageOpen
 	icecreamResponse.Ingredients = icecream.Ingredients
-	icecreamResponse.SourcingValues = icecreamResponse.SourcingValues
-	icecreamResponse.Story = icecreamResponse.Story
-	icecreamResponse.DietaryCertifications = icecreamResponse.DietaryCertifications
+	icecreamResponse.SourcingValues = icecream.SourcingValues
+	icecreamResponse.Story = icecream.Story
+	icecreamResponse.DietaryCertifications = icecream.DietaryCertifications
 	icecreamResponse.LastUpdatedAt = icecream.LastUpdatedAt
 
 	return icecreamResponse

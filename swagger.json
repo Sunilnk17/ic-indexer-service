@@ -86,6 +86,43 @@
             }
           }
         }
+      },
+      "delete": {
+        "description": "Delete Icecream",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "http"
+        ],
+        "summary": "Delete Icecream",
+        "operationId": "deleteIcecream",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Product id",
+            "name": "product_id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "genericModel",
+            "schema": {
+              "$ref": "#/definitions/genericModel"
+            }
+          },
+          "default": {
+            "description": "genericError",
+            "schema": {
+              "$ref": "#/definitions/genericError"
+            }
+          }
+        }
       }
     }
   },
@@ -316,6 +353,18 @@
         }
       },
       "x-go-name": "IcecreamClientRequest",
+      "x-go-package": "ic-indexer-service/app/model/request"
+    },
+    "icecreamDeleteRequest": {
+      "description": "Delete icecream Request",
+      "type": "object",
+      "properties": {
+        "ProductId": {
+          "description": "a icecream delete request\nin: body",
+          "type": "string"
+        }
+      },
+      "x-go-name": "IcecreamDelete",
       "x-go-package": "ic-indexer-service/app/model/request"
     },
     "icecreamRequest": {

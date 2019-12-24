@@ -9,7 +9,9 @@ import (
 )
 
 const (
-	getIcecream = "GetIcecream"
+	getIcecream    = "GetIcecream"
+	putIcecream    = "PutIcecream"
+	deleteIcecream = "deleteIcecream"
 )
 
 func GetRoutes() *mux.Router {
@@ -24,7 +26,10 @@ func GetRoutes() *mux.Router {
 	v1Router.HandleFunc("/icecream", controller.GetIcecream).Methods(http.MethodGet).Name(getIcecream)
 
 	//PUT
-	v1Router.HandleFunc("/icecream", controller.UpdateIcecream).Methods(http.MethodPut).Name(getIcecream)
+	v1Router.HandleFunc("/icecream", controller.UpdateIcecream).Methods(http.MethodPut).Name(putIcecream)
+
+	//DELETE
+	v1Router.HandleFunc("/icecream", controller.DeleteIcecream).Methods(http.MethodDelete).Name(deleteIcecream)
 
 	addMiddlewares(v1Router)
 

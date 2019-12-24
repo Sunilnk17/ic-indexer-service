@@ -12,6 +12,7 @@ import (
 
 type IcecreamIndexer interface {
 	PartialUpdate(context.Context, request.IcecreamIndexRequest) error
+	DeleteIcecream(context.Context, request.IcecreamDelete) error
 	Search(context.Context, request.IcecreamFilter) (response.BulkIcecreamIndexResponse, error)
 }
 
@@ -26,6 +27,10 @@ func GetNewIcecreamIndexerService(das dataaccessor.IceCreamDataAccessor, updateH
 
 func (iis icecreamIndexerService) Search(ctx context.Context, params request.IcecreamFilter) (response.BulkIcecreamIndexResponse, error) {
 	return iis.das.GetIcecreams(ctx, params)
+}
+
+func (iis icecreamIndexerService) DeleteIcecream(ctx context.Context, params request.IcecreamDelete) error {
+	return iis.das.DeleteIcecream(ctx, params)
 }
 
 func (iis icecreamIndexerService) PartialUpdate(ctx context.Context, icecreamRequest request.IcecreamIndexRequest) error {

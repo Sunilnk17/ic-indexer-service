@@ -7,7 +7,6 @@ import (
 	"ic-indexer-service/app/model/request"
 	"ic-indexer-service/app/processor"
 	"ic-indexer-service/app/response_handler"
-	"log"
 	"net/http"
 )
 
@@ -122,13 +121,62 @@ func UpdateIcecream(w http.ResponseWriter, r *http.Request) {
 	indexerService := processor.GetNewIcecreamIndexerService(getIcecreamIndexerParams())
 	updatingError := indexerService.PartialUpdate(r.Context(), icecreamRequest)
 	if updatingError != nil {
-		msg := local_config.GetTranslationMessage(r.Context(), "invalid_companyId_or_sectorId")
+		msg := local_config.GetTranslationMessage(r.Context(), "invalid_request_params")
 		response_handler.WriteErrorResponseAsJson(w, r, http.StatusBadRequest, msg)
 		return
 	}
-	var responseMessage string
-	responseMessage = local_config.GetTranslationMessage(r.Context(), "indexed_successfully")
-	log.Print(r.Context(), responseMessage)
-	response_handler.WriteResponseMapAsJson(w, r, http.StatusOK, getResultAsMap(responseMessage))
+	response_handler.WriteResponseMapAsJson(w, r, http.StatusOK, getResultAsMap("indexed successfully"))
+	return
+}
+
+// swagger:operation Delete /icecream deleteIcecream
+// ---
+// summary: Delete Icecream
+// description: Delete Icecream
+// parameters:
+// - name: product_id
+//   in: query
+//   description: Product id
+//   type: string
+//   required: true
+//   Responses:
+//     default: body:genericError
+//     200: body:genericModel
+// swagger:route DELETE /icecream deleteIcecream
+//
+// Delete Icecream
+//
+//
+//     Consumes:
+//     - application/json
+//
+//     Produces:
+//     - application/json
+//
+//     Schemes: http
+//
+//
+//     Responses:
+//       default: body:genericError
+//       200: body:genericModel
+func DeleteIcecream(w http.ResponseWriter, r *http.Request) {
+	var icecreamDeleteRequest request.IcecreamDelete
+
+	err := preprocessor.DecodeAndValidateRequestParams(r, &icecreamDeleteRequest)
+
+	if err != nil {
+		msg := local_config.GetTranslationMessage(r.Context(), "invalid_request_params")
+		response_handler.WriteErrorResponseAsJson(w, r, http.StatusBadRequest, msg)
+		return
+	}
+
+	indexerService := processor.GetNewIcecreamIndexerService(getIcecreamIndexerParams())
+	updatingError := indexerService.DeleteIcecream(r.Context(), icecreamDeleteRequest)
+	if updatingError != nil {
+		msg := local_config.GetTranslationMessage(r.Context(), "invalid_request_params")
+		response_handler.WriteErrorResponseAsJson(w, r, http.StatusBadRequest, msg)
+		return
+	}
+	response_handler.WriteResponseMapAsJson(w, r, http.StatusOK, getResultAsMap("deleted successfully"))
 	return
 }

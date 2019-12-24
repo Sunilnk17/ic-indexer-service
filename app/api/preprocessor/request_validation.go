@@ -52,8 +52,12 @@ func BindRequest(r *http.Request, structPointer interface{}) error {
 	}
 	var decoderError error
 
-	if r.Method == http.MethodGet {
+	if r.Method == http.MethodGet || r.Method == http.MethodDelete {
 		decoderError = config.GetReqParamsDecoder().Decode(structPointer, r.Form)
+
+	} else {
+		log.Print(r.Context(), "Actual Request Body: ", r.Body)
+		decoderError = json.NewDecoder(r.Body).Decode(structPointer)
 	}
 	return decoderError
 }
