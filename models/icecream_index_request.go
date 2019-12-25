@@ -19,9 +19,6 @@ type IcecreamIndexRequest struct {
 	// allergy info
 	AllergyInfo *CusString `json:"allergy_info,omitempty"`
 
-	// created at
-	CreatedAt *CusTime `json:"created_at,omitempty"`
-
 	// description
 	Description *CusString `json:"description,omitempty"`
 
@@ -39,9 +36,6 @@ type IcecreamIndexRequest struct {
 
 	// ingredients
 	Ingredients *CusArrayString `json:"ingredients,omitempty"`
-
-	// last updated at
-	LastUpdatedAt *CusTime `json:"last_updated_at,omitempty"`
 
 	// name
 	Name *CusString `json:"name,omitempty"`
@@ -61,10 +55,6 @@ func (m *IcecreamIndexRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAllergyInfo(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateCreatedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -89,10 +79,6 @@ func (m *IcecreamIndexRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateIngredients(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateLastUpdatedAt(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -128,24 +114,6 @@ func (m *IcecreamIndexRequest) validateAllergyInfo(formats strfmt.Registry) erro
 		if err := m.AllergyInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allergy_info")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *IcecreamIndexRequest) validateCreatedAt(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.CreatedAt) { // not required
-		return nil
-	}
-
-	if m.CreatedAt != nil {
-		if err := m.CreatedAt.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("created_at")
 			}
 			return err
 		}
@@ -254,24 +222,6 @@ func (m *IcecreamIndexRequest) validateIngredients(formats strfmt.Registry) erro
 		if err := m.Ingredients.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ingredients")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *IcecreamIndexRequest) validateLastUpdatedAt(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.LastUpdatedAt) { // not required
-		return nil
-	}
-
-	if m.LastUpdatedAt != nil {
-		if err := m.LastUpdatedAt.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("last_updated_at")
 			}
 			return err
 		}

@@ -27,7 +27,6 @@ func (updateHandler) UpdateIcecreamDetails(ctx context.Context, icecream *bo.ESI
 	icecream.Id = helpers.GetInt64(params.Id, icecream.Id)
 	icecream.Name = helpers.GetString(params.Name, icecream.Name)
 	icecream.ProductId = helpers.GetString(params.ProductId, icecream.ProductId)
-	icecream.LastUpdatedAt = helpers.GetTime(params.LastUpdatedAt, icecream.LastUpdatedAt)
 	icecream.Ingredients = helpers.GetArrayString(params.Ingredients, icecream.Ingredients)
 	icecream.SourcingValues = helpers.GetArrayString(params.SourcingValues, icecream.SourcingValues)
 	icecream.DietaryCertifications = helpers.GetString(params.DietaryCertifications, icecream.DietaryCertifications)
@@ -36,7 +35,6 @@ func (updateHandler) UpdateIcecreamDetails(ctx context.Context, icecream *bo.ESI
 	icecream.ImageOpen = helpers.GetString(params.ImageOpen, icecream.ImageOpen)
 	icecream.ImageClosed = helpers.GetString(params.ImageClosed, icecream.ImageClosed)
 	icecream.AllergyInfo = helpers.GetString(params.AllergyInfo, icecream.AllergyInfo)
-	icecream.CreatedAt = helpers.GetTime(params.CreatedAt, icecream.CreatedAt)
 
 	return nil
 

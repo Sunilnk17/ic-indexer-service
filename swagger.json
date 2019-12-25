@@ -196,9 +196,6 @@
         "allergy_info": {
           "$ref": "#/definitions/CusString"
         },
-        "created_at": {
-          "$ref": "#/definitions/CusTime"
-        },
         "description": {
           "$ref": "#/definitions/CusString"
         },
@@ -216,9 +213,6 @@
         },
         "ingredients": {
           "$ref": "#/definitions/CusArrayString"
-        },
-        "last_updated_at": {
-          "$ref": "#/definitions/CusTime"
         },
         "name": {
           "$ref": "#/definitions/CusString"
@@ -293,11 +287,6 @@
           "type": "string",
           "x-go-name": "AllergyInfo"
         },
-        "created_at": {
-          "type": "string",
-          "format": "date-time",
-          "x-go-name": "CreatedAt"
-        },
         "description": {
           "type": "string",
           "x-go-name": "Description"
@@ -327,10 +316,9 @@
           },
           "x-go-name": "Ingredients"
         },
-        "last_updated_at": {
-          "type": "string",
-          "format": "date-time",
-          "x-go-name": "LastUpdatedAt"
+        "is_Deleted": {
+          "type": "boolean",
+          "x-go-name": "IsDeleted"
         },
         "name": {
           "type": "string",

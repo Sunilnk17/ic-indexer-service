@@ -27,8 +27,6 @@ type IcecreamIndexRequest struct {
 	Id                    CusInt64       `json:"id" validate:"gt=0"`
 	Name                  CusString      `json:"name,omitempty"`
 	ImageClosed           CusString      `json:"image_closed,omitempty"`
-	CreatedAt             CusTime        `json:"created_at,omitempty"`
-	LastUpdatedAt         CusTime        `json:"last_updated_at,omitempty"`
 	ImageOpen             CusString      `json:"image_open,omitempty"`
 	Description           CusString      `json:"description,omitempty"`
 	Story                 CusString      `json:"story,omitempty"`
@@ -44,19 +42,18 @@ type IcecreamIndexRequest struct {
 type IcecreamClientRequest struct {
 	// an icecream request
 	// in: body
-	Id                    int64     `json:"id" validate:"gt=0"`
-	Name                  string    `json:"name,omitempty"`
-	ImageClosed           string    `json:"image_closed,omitempty"`
-	CreatedAt             time.Time `json:"created_at,omitempty"`
-	LastUpdatedAt         time.Time `json:"last_updated_at,omitempty"`
-	ImageOpen             string    `json:"image_open,omitempty"`
-	Description           string    `json:"description,omitempty"`
-	Story                 string    `json:"story,omitempty"`
-	AllergyInfo           string    `json:"allergy_info,omitempty"`
-	SourcingValues        []string  `json:"sourcing_values,omitempty"`
-	Ingredients           []string  `json:"ingredients,omitempty"`
-	DietaryCertifications string    `json:"dietary_certifications,omitempty"`
-	ProductId             string    `json:"product_id,omitempty"`
+	Id                    int64    `json:"id" validate:"gt=0"`
+	Name                  string   `json:"name,omitempty"`
+	ImageClosed           string   `json:"image_closed,omitempty"`
+	ImageOpen             string   `json:"image_open,omitempty"`
+	Description           string   `json:"description,omitempty"`
+	Story                 string   `json:"story,omitempty"`
+	AllergyInfo           string   `json:"allergy_info,omitempty"`
+	SourcingValues        []string `json:"sourcing_values,omitempty"`
+	Ingredients           []string `json:"ingredients,omitempty"`
+	DietaryCertifications string   `json:"dietary_certifications,omitempty"`
+	ProductId             string   `json:"product_id,omitempty"`
+	IsDeleted             bool     `json:"is_Deleted,omitempty"`
 }
 
 // Icecream Generic Response

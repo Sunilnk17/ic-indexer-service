@@ -10,7 +10,6 @@ func IcecreamIndexResponseBuilder(icecream bo.ESIcecream) response.IcecreamIndex
 
 	icecreamResponse.ProductId = icecream.ProductId
 	icecreamResponse.Name = icecream.Name
-	icecreamResponse.CreatedAt = icecream.CreatedAt
 	icecreamResponse.AllergyInfo = icecream.AllergyInfo
 	icecreamResponse.Description = icecream.Description
 	icecreamResponse.Id = icecream.Id
@@ -20,7 +19,6 @@ func IcecreamIndexResponseBuilder(icecream bo.ESIcecream) response.IcecreamIndex
 	icecreamResponse.SourcingValues = icecream.SourcingValues
 	icecreamResponse.Story = icecream.Story
 	icecreamResponse.DietaryCertifications = icecream.DietaryCertifications
-	icecreamResponse.LastUpdatedAt = icecream.LastUpdatedAt
 
 	return icecreamResponse
 }

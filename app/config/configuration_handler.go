@@ -42,10 +42,6 @@ func GetConfig() *Config {
 	return config
 }
 
-func SetDummyConfig() {
-	config = &Config{}
-}
-
 func InitializeElasticSearchClient() {
 	log.Print("Initializing Elastic Search connection")
 	var err error

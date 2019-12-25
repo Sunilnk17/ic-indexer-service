@@ -61,20 +61,3 @@ func BindRequest(r *http.Request, structPointer interface{}) error {
 	}
 	return decoderError
 }
-
-func BindAndUnMarshallRequest(r *http.Request, structPointer interface{}, validationPointer interface{}) ([]byte, error) {
-
-	err := BindRequest(r, structPointer)
-	if err != nil {
-		return nil, err
-	}
-
-	bytes, err := json.Marshal(structPointer)
-	if err != nil {
-		return nil, err
-	}
-
-	err = json.Unmarshal(bytes, validationPointer)
-
-	return bytes, err
-}

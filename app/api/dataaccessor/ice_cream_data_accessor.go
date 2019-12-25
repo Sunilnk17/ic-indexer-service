@@ -12,8 +12,10 @@ import (
 	"ic-indexer-service/app/model/response"
 	"log"
 	"net/http"
+	"strconv"
 )
 
+//go:generate sh -c "$GOPATH/bin/mockery -case=underscore -dir=. -name=IceCreamDataAccessor"
 type IceCreamDataAccessor interface {
 	CreateOrReplaceIcecream(context.Context, bo.ESIcecream) error
 	DeleteIcecream(context.Context, request.IcecreamDelete) error
@@ -133,12 +135,10 @@ func (icdas icecreamDataAccessorService) CreateOrReplaceIcecream(ctx context.Con
 		return err
 	}
 
-	id := icecream.GetKey()
-
 	_, err = config.GetESConnection().Index().
 		Index(icdas.index.IndexName).
 		Type(icdas.index.Type).
-		Id(id).
+		Id(strconv.Itoa(int(*icecream.Id))).
 		BodyJson(icecream).
 		Do(ctx)
 

@@ -8,9 +8,7 @@ package models
 import (
 	strfmt "github.com/go-openapi/strfmt"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // IcecreamClientRequest SaveOrUpdate icecream Request
@@ -19,10 +17,6 @@ type IcecreamClientRequest struct {
 
 	// allergy info
 	AllergyInfo string `json:"allergy_info,omitempty"`
-
-	// created at
-	// Format: date-time
-	CreatedAt strfmt.DateTime `json:"created_at,omitempty"`
 
 	// description
 	Description string `json:"description,omitempty"`
@@ -43,9 +37,8 @@ type IcecreamClientRequest struct {
 	// ingredients
 	Ingredients []string `json:"ingredients"`
 
-	// last updated at
-	// Format: date-time
-	LastUpdatedAt strfmt.DateTime `json:"last_updated_at,omitempty"`
+	// is deleted
+	IsDeleted bool `json:"is_Deleted,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
@@ -62,45 +55,6 @@ type IcecreamClientRequest struct {
 
 // Validate validates this icecream client request
 func (m *IcecreamClientRequest) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateCreatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateLastUpdatedAt(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *IcecreamClientRequest) validateCreatedAt(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.CreatedAt) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("created_at", "body", "date-time", m.CreatedAt.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *IcecreamClientRequest) validateLastUpdatedAt(formats strfmt.Registry) error {
-
-	if swag.IsZero(m.LastUpdatedAt) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("last_updated_at", "body", "date-time", m.LastUpdatedAt.String(), formats); err != nil {
-		return err
-	}
-
 	return nil
 }
 

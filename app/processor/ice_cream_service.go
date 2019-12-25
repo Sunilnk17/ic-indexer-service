@@ -47,7 +47,7 @@ func (iis icecreamIndexerService) PartialUpdate(ctx context.Context, icecreamReq
 
 	err = iis.updateHandler.UpdateIcecreamDetails(ctx, &newEsIcecream, icecreamRequest)
 	if err != nil {
-		log.Fatal(ctx, "Failed to update the icecream. Error is: ", err)
+		log.Print(ctx, "Failed to update the icecream. Error is: ", err)
 		return err
 	}
 	log.Print(ctx, "The new updated icecream is :", fmt.Sprintf("%+v", newEsIcecream))
@@ -62,7 +62,7 @@ func (iis icecreamIndexerService) PartialUpdate(ctx context.Context, icecreamReq
 func (iis icecreamIndexerService) updateSources(ctx context.Context, icecream bo.ESIcecream) error {
 	err := iis.das.CreateOrReplaceIcecream(ctx, icecream)
 	if err != nil {
-		log.Fatal(ctx, "Failed to update elastic search. Err is :", err)
+		log.Print(ctx, "Failed to update elastic search. Err is :", err)
 		return err
 	}
 	return nil

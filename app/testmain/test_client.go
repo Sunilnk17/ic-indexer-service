@@ -22,9 +22,9 @@ func main() {
 	client := client.NewHTTPClientWithConfig(nil, client.DefaultTransportConfig().WithHost("localhost:5010"))
 	client.Operations.SetTransport(client.Transport)
 
-	appointment, err := client.Operations.GetIcecream(param)
+	icecream, err := client.Operations.GetIcecream(param)
 	if err == nil {
-		fmt.Print(appointment.Payload.Data)
+		fmt.Print(icecream.Payload.Data)
 	} else {
 		data, ok := err.(*operations.SaveOrUpdateIcecreamDefault)
 		if ok {
